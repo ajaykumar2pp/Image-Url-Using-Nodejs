@@ -35,8 +35,9 @@ function imageController() {
                 }
 
                 const filePath = req.file.path;
-                // console.log(req.file)
-                // console.log(filePath)
+                
+                console.log(req.file)
+                console.log(filePath)
 
                 const { name, email } = req.body;
                 console.log(name, email)

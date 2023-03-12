@@ -16,6 +16,7 @@ const {connectMonggose} = require('./app/database/db')
 connectMonggose();
 
 
+global.appRoot = path.resolve(__dirname);
 
 // *************************    Assets    ****************************************//
 const publicPath = path.join(__dirname,"public");
