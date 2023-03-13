@@ -1,3 +1,4 @@
+require('dotenv').config()
 const User = require("../model/imageURL")
 const multer = require("multer")
 const fs = require("fs")
@@ -34,7 +35,7 @@ function imageController() {
                     return resp.send("Internal error")
                 }
 
-                const filePath = req.file.path;
+                const filePath =req.file.path;
                 
                 console.log(req.file)
                 console.log(filePath)
@@ -50,7 +51,7 @@ function imageController() {
                     });
                     // resp.status(201).json({ 'data': { ImageURL: document } });
                     // document.save();
-                    console.log(document)
+                    console.log(filePath)
                 } catch (err) {
                     resp.status(500).json(err);
                 }
