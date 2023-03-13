@@ -14,5 +14,5 @@ const imageSchema = new Schema(
         
       
     },
-    { timestamps: true, toJSON: { getters: true } });
+    { timestamps: true, toJSON: { getters: true },id: false });
 module.exports = mongoose.model('ImageURL', imageSchema);

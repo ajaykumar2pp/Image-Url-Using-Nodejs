@@ -48,12 +48,13 @@ function imageController() {
                         email,
                         image: filePath,
                     });
-                    resp.status(201).json({ 'data': { ImageURL: document } });
-                    document.save();
+                    // resp.status(201).json({ 'data': { ImageURL: document } });
+                    // document.save();
+                    console.log(document)
                 } catch (err) {
                     resp.status(500).json(err);
                 }
-                // resp.status(201).json({ msg: "this is image uplaod " });
+                resp.status(201).json({ 'data': { ImageURL: document } });
             })
         }
     }
