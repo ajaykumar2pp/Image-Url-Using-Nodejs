@@ -28,19 +28,16 @@ function imageController() {
         getImage(req, resp) {
             resp.render("home")
         },
-        getImageUrl(req,resp){
-            User.findOne()
-            .then((image) => {
-              if (image) {
-                console.log(`Image URL: ${image.imageUrl}`);
-              } else {
-                console.log('No image found');
-              }
-            })
-            .catch((err) => {
+        async getImageUrl(req, resp) {
+            try {
+              const user = await User.findOne().sort({ _id: -1 });
+              const imageUrl = user?.imageUrl || ""; // use default value if user is null or imageUrl is null/undefined
+              resp.render("home", { imageUrl });
+            } catch (err) {
               console.error(err);
-            });
-        },
+              resp.status(500).send("Internal server error");
+            }
+          },
         postImage(req, resp) {
             handleMultipartData(req, resp, async (err) => {
 
