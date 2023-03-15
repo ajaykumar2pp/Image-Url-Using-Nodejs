@@ -28,6 +28,19 @@ function imageController() {
         getImage(req, resp) {
             resp.render("home")
         },
+        getImageUrl(req,resp){
+            User.findOne()
+            .then((image) => {
+              if (image) {
+                console.log(`Image URL: ${image.imageUrl}`);
+              } else {
+                console.log('No image found');
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        },
         postImage(req, resp) {
             handleMultipartData(req, resp, async (err) => {
 
@@ -36,7 +49,11 @@ function imageController() {
                 }
 
                 const filePath =req.file.path;
-                
+                // const imageURL =`http://localhost:8000/${filePath}`;
+
+                const imageURL =`${process.env.APP_URL}/${filePath}`;
+               
+               
                 console.log(req.file)
                 console.log(filePath)
 
@@ -47,11 +64,11 @@ function imageController() {
                     document = await User.create({
                         name,
                         email,
-                        image: filePath,
+                        image: imageURL,
                     });
                     // resp.status(201).json({ 'data': { ImageURL: document } });
                     // document.save();
-                    console.log(filePath)
+                    console.log(imageURL)
                 } catch (err) {
                     resp.status(500).json(err);
                 }
