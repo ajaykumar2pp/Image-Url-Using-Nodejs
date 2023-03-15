@@ -31,9 +31,9 @@ function imageController() {
         async getImageUrl(req, resp) {
             try {
               const user = await User.findOne().sort({ _id: -1 });
-              const imageUrl = user?.imageUrl || ""; // use default value if user is null or imageUrl is null/undefined
+            //   const imageUrl = user?.imageUrl || ""; // use default value if user is null or imageUrl is null/undefined
             //   resp.render("home", { imageUrl });
-            resp.status(201).json({ 'data': { ImageURL: imageUrl} });
+            resp.status(201).json({ 'data': { ImageURL: user} });
             } catch (err) {
               console.error(err);
               resp.status(500).send("Internal server error");
