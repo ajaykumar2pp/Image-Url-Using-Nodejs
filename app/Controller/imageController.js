@@ -28,9 +28,10 @@ function imageController() {
         getImage(req, resp) {
             resp.render("home")
         },
+            // ********************************  Find List All Product *******************************//
         async getImageUrl(req, resp) {
             try {
-              const user = await User.findOne().sort({ _id: -1 });
+              const user = await User.find().select('-updatedAt -createdAt -__v').sort({ _id: -1 });
             //   const imageUrl = user?.imageUrl || ""; // use default value if user is null or imageUrl is null/undefined
             //   resp.render("home", { imageUrl });
             resp.status(201).json({ 'data': { ImageURL: user} });
