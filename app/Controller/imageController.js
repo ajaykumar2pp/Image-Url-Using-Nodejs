@@ -50,8 +50,9 @@ function imageController() {
 
                 const filePath =req.file.path;
                 // const imageURL =`http://localhost:8000/${filePath}`;
-
-                const imageURL =`${process.env.PORT}/${filePath}`;
+                // const imageURL =`${process.env.APP_URL}/${filePath}`;
+                // const imageURL =`${process.env.PORT}/${filePath}`;
+                const imageURL =`https://${req.headers.host}/${filePath}`;
                
                
                 console.log(req.file)
