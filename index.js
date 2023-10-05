@@ -37,4 +37,3 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT,()=>{
     console.log(`My server start on this port ${PORT}`)
 })
-  // "start": "nodemon index.js -e js , ejs"
