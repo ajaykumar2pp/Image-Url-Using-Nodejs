@@ -1,7 +1,6 @@
 require('dotenv').config()
 const User = require("../model/imageURL")
 const multer = require("multer")
-const fs = require("fs")
 const path = require("path")
 
 
@@ -47,7 +46,6 @@ function imageController() {
                     console.error(err);
                     return resp.status(500).json({ error: 'Internal server error' });
                 }
-
 
 
 
