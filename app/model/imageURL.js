@@ -12,10 +12,11 @@ const imageSchema = new Schema(
          if (process.env.ON_RENDER === 'false') {
             return image;
         }
-            return `${process.env.APP_URL}/${image}`
+            return `${image}`
+            //  return `${process.env.APP_URL}/${image}`
         } },
-        
-      
     },
     { timestamps: true, toJSON: { getters: true },id: false });
 module.exports = mongoose.model('ImageURL', imageSchema);
+
+

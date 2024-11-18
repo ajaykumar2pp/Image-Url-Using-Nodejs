@@ -2,6 +2,8 @@ require('dotenv').config()
 const User = require("../model/imageURL")
 const multer = require("multer")
 const path = require("path")
+// const fs = require("fs")
+const fs = require('fs').promises;
 
 
 const storage = multer.diskStorage({
@@ -39,42 +41,63 @@ function imageController() {
                 resp.status(500).send("Internal server error");
             }
         },
-        async postImage(req, resp) {
+
+        postImage(req, resp) {
             handleMultipartData(req, resp, async (err) => {
-
-                if (err) {
-                    console.error(err);
-                    return resp.status(500).json({ error: 'Internal server error' });
-                }
-
-
-
-                const { name, email } = req.body;
-                console.log(name, email)
-                const filePath = req.file.path;
-                // const imageURL =`http://localhost:8000/${filePath}`;
-                // const imageURL =`${process.env.APP_URL}/${filePath}`;
-                // const imageURL =`${process.env.PORT}/${filePath}`;
-                // const imageURL =`https://${req.headers.host}/${filePath}`;
-                const imageURL = `http://${req.headers.host}/${filePath.replace(/\\/g, '/')}`;
-                console.log(req.file)
-                console.log(filePath)
-
-
                 try {
+                    if (err) {
+                        console.error('Error handling multipart data:', err);
+                        return resp.status(500).json({ error: 'Error processing file upload' });
+                    }
+
+                    // Ensure a file was uploaded
+                    if (!req.file) {
+                        console.log('No file received');
+                        return resp.status(400).json({ error: 'No file uploaded' });
+                    }
+
+                    // Get image details
+                    const imageName = req.file.filename;
+                    const imageURL = `http://${req.headers.host}/uploads/${imageName}`;
+
+                    // Validate required fields
+                    const { name, email } = req.body;
+                    if (!name || !email) {
+                        console.log('Missing required fields: name or email');
+
+                        // Delete the uploaded file asynchronously
+                        await fs.unlink(req.file.path);
+                        console.log('Uploaded file deleted due to missing fields.');
+
+                        return resp.status(400).json({ error: 'All required fields are mandatory' });
+                    }
+
+                    // Save user details to the database
                     const document = await User.create({
                         name,
                         email,
-                        image: imageURL,
+                        image: imageURL, // Store the image URL in the database
                     });
-                    resp.status(201).json({ 'data': { ImageURL: document } });
-                    console.log(imageURL)
-                } catch (err) {
-                    console.error(err);
+
+                    // Respond with success
+                    resp.status(201).json({ message: 'User created successfully', data: document });
+
+                } catch (error) {
+                    console.error('Error in postImage:', error);
+
+                    // Ensure the uploaded file is deleted on error
+                    if (req.file && req.file.path) {
+                        try {
+                            await fs.unlink(req.file.path);
+                            console.log('Uploaded file deleted due to an internal error.');
+                        } catch (unlinkError) {
+                            console.error('Error deleting file:', unlinkError);
+                        }
+                    }
+
                     resp.status(500).json({ error: 'Internal server error' });
                 }
-
-            })
+            });
         }
     }
 }

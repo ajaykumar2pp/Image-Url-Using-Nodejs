@@ -1,11 +1,11 @@
 require('dotenv').config()
 const mongoose = require('mongoose');
 exports.connectMonggose =()=>{
-  
-    mongoose.connect(process.env.DATABASE_URL,
-    {
-        useNewUrlParser: true
+    mongoose.connect(process.env.Database_URL)
+    .then(()=>{
+        console.log("Connected to MongoDB Atlas");
     })
-    .then((e)=>console.log("Connected to Mongodb =>>Image Url Create "))
-    .catch((e)=>console.log("Not Connect Mongodb"))
+    .catch((err)=>{
+        console.error('Connection error', err);
+    })
 }
