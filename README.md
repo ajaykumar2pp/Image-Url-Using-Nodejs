@@ -1,32 +1,62 @@
-# Image-Url-Using-Nodejs Project 🚀
+# 🖼️ Image-URL-Using-Node.js Project 🚀
 
-This is a Image URL Create  Project which is built using Nodejs, Ejs ,CSS, Javascript , Bootstrap. It is responsive across all devices.
-<br/>
-<br/>
+A dynamic **Image URL Creation** project built with **Node.js**, **EJS**, **CSS**, **JavaScript**, and **Bootstrap**. This application is responsive and works seamlessly across all devices.
 
-## Feature
--Add Name 
--Add Email
--Upload Image 
-<br/>
-<br/>
+---
 
-## Packages Install
--body-parser <br/>
--dotenv<br/>
--ejs<br/>
--express<br/>
--mongoose<br/>
--nodemon<br/>
--multer<br/>
+## 🌟 Features
+
+- ➕ **Add User Name**  
+- ✉️ **Add Email**  
+- 📤 **Upload Image**
+
+---
+
+## ⚙️ Packages Installed
+
+| Package        | Description                                |
+|----------------|--------------------------------------------|
+| **dotenv**     | Load environment variables from a `.env` file |
+| **ejs**        | Embedded JavaScript templating             |
+| **express**    | Web framework for Node.js                  |
+| **mongoose**   | MongoDB object modeling tool               |
+| **nodemon**    | Auto-restart the server on changes         |
+| **multer**     | Handle multipart/form-data (image uploads) |
+
+---
+
+## 🛠️ Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ajaykumar2pp/Image-Url-Using-Nodejs
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd image-url-using-nodejs
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm start
+   ```
+
+---
+
+## 📸 API Endpoints
+
+| HTTP Method | Endpoint               | Description               |
+|-------------|------------------------|---------------------------|
+| `GET`       | `/`        | Render upload page with images        |
+| `POST`      | `/upload`        | Upload a new image    |
+| `GET`       | `/image`    | Fetch a specific image by ID  |
 
 
-## 🔗 Links
 
-> ## Checkout the website link : https://user-api-r5y9.onrender.com/
-
-<br/>
-<br/>
+---
 ### 💻 Screens
 
 ### Add Name, Email and Image Upload 
